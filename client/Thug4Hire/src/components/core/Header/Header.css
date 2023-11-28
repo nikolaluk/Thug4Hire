@@ -1,0 +1,39 @@
+header {
+    display: flex;
+    justify-content: space-between;
+
+    height: 6vh;
+    background-color: #202225;
+}
+
+.headerHome {
+    margin-left: 1rem;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    text-decoration: none;
+    color: #929298;
+}
+
+.headerHome:hover {
+    cursor: pointer;
+    color: white;
+}
+
+.headerLinks {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+
+    margin-right: 1rem;
+}
+
+.headerLink {
+    text-decoration: none;
+    color: #929298;
+}
+
+.headerLink:hover {
+    text-decoration: none;
+    color: white;
+}
