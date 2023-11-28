@@ -2,6 +2,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react'
+
+import { register } from '../../../services/userService';
+
 import './Register.css'
 
 library.add(fas);
@@ -26,12 +29,9 @@ function Register() {
     function submitHandler(event) {
         event.preventDefault();
 
-        console.log(username);
-
-        //Add repass
-        //register({username, email, password})
-        //  .then((data) => console.log(data))  
-        //  .catch((err) => console.log(err));
+        register({ username, password })
+            .then((data) => console.log(data))
+            .catch((err) => console.log(err));
     }
 
     return (
@@ -42,14 +42,14 @@ function Register() {
                 <input name='username' type="username" value={username} onChange={usernameChangeHandler} />
             </div>
             <div>
-                <label htmlFor="password"  className='fix'>Password:</label>
+                <label htmlFor="password" className='fix'>Password:</label>
                 <input name='password' type="password" value={password} onChange={passwordChangeHandler} />
-                <FontAwesomeIcon icon="fa-solid fa-eye" className='registerIcon'/> 
+                <FontAwesomeIcon icon="fa-solid fa-eye" className='registerIcon' />
             </div>
             <div>
                 <label htmlFor="password">Repeat password:</label>
                 <input name="password" type="password" value={repeatPassword} onChange={repeatPasswordChangeHandler} />
-                <FontAwesomeIcon icon="fa-solid fa-eye" className='registerIcon'/>
+                <FontAwesomeIcon icon="fa-solid fa-eye" className='registerIcon' />
             </div>
             <button type='submit' onClick={submitHandler}>Submit</button>
         </form>
