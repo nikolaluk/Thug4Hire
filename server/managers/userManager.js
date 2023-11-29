@@ -3,20 +3,24 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
 
-exports.register = async (userdata) => {
-    if (await User.findOne({ email: userdata.email })) {
-        throw new Error('Email is already a member!');
+exports.register = async ({username, password, repeatPassword}) => {
+    if (await User.findOne({ username: username })) {
+        throw new Error('Account already exists!');
     }
 
-    const user = await User.create(userdata);
+    if(password != repeatPassword) {
+        throw new Error('Passwords must match!');
+    }
+
+    const user = await User.create({username, password});
 
     const result = getAuthResult(user);
 
     return result;
 }
 
-exports.login = async ({ email, password }) => {
-    const user = await User.findOne({ email });
+exports.login = async ({ username, password }) => {
+    const user = await User.findOne({ username });
 
     if (!user) {
         throw new Error('Invalid username or password!');
@@ -36,7 +40,7 @@ exports.login = async ({ email, password }) => {
 function getAuthResult(user) {
     const payload = {
         _id: user._id,
-        email: user.email,
+        username: user.username,
     }
 
     // synchronous variant
@@ -44,7 +48,7 @@ function getAuthResult(user) {
 
     const result = {
         _id: user._id,
-        email: user.email,
+        username: user.username,
         accessToken: token,
     }
 

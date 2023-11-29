@@ -1,11 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react'
-
-import { register } from '../../../services/userService';
+import { useContext, useState } from 'react'
 
 import './Register.css'
+import AuthContext from '../../../contexts/authContext';
 
 library.add(fas);
 
@@ -13,6 +12,7 @@ function Register() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
+    const { registerSubmitHandler } = useContext(AuthContext);
 
     function usernameChangeHandler(event) {
         setUsername(event.target.value);
@@ -29,9 +29,7 @@ function Register() {
     function submitHandler(event) {
         event.preventDefault();
 
-        register({ username, password })
-            .then((data) => console.log(data))
-            .catch((err) => console.log(err));
+        registerSubmitHandler({username, password, repeatPassword});
     }
 
     return (

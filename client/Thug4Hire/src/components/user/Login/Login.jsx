@@ -1,17 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
-
-import { login } from '../../../services/userService';
+import { useContext, useState } from 'react';
 
 import './Login.css';
+import AuthContext from '../../../contexts/authContext';
 
 library.add(fas);
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const { loginSubmitHandler } = useContext(AuthContext);
 
   function usernameChangeHandler(event) {
     setUsername(event.target.value);
@@ -24,11 +24,7 @@ function Login() {
   function submitHandler(event) {
     event.preventDefault();
 
-    console.log(username);
-    console.log(password);
-    login({ username, password })
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+    loginSubmitHandler({username, password});
   }
 
   return (
