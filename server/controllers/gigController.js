@@ -10,12 +10,23 @@ router.get('/', async (req,res) => {
     res.json(gigs);
 });
 
+router.get('/:gigId', async (req,res) => {
+    // const {search,from,to} = req.query;
+
+    const gig = await gigManager.getOne(req.params.gigId);
+
+    if(!gig){
+        throw new Error('Gig not found');
+    }
+
+    res.json(gig);
+});
+
 
 router.post('/create', isAuth, async (req, res) => {
-    const { title } = req.body;
+    const { title, type, price, description } = req.body;
     const owner = req.user;
-    console.log(owner);
-    const result = await gigManager.create({ title, owner });
+    const result = await gigManager.create({ title, type, price, description, owner });
     res.json(result);
 });
 

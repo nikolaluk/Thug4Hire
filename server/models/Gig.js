@@ -1,13 +1,25 @@
 const mongoose = require('mongoose');
 
 const gigSchema = new mongoose.Schema({
-    owner: {
-        type: mongoose.Types.ObjectId,
-        ref: 'User'
-    },
     title: {
         type: String,
         required: true,
+    },
+    type: {
+        type: String,
+        required: true,
+    },
+    price: {
+        type: Number,
+        required: true,
+    },
+    description: {
+        type: String,
+        required: true,
+    },
+    owner: {
+        type: mongoose.Types.ObjectId,
+        ref: 'User'
     },
 });
 

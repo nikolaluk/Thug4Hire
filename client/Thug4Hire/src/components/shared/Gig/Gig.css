@@ -1,0 +1,43 @@
+.gig {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1em;
+
+    width: 30vw;
+    min-width: 300px;
+    max-width: 439px;
+    height: 24vh;
+
+    padding: 1em;
+    margin-top: 2em;
+
+    background-color: #292D30;
+    box-shadow: 6px -6px 1px #303439;
+
+    text-decoration: none;
+    color: #929298;
+}
+
+.gigUpper {
+    display: flex;
+}
+
+.gigUpper>img {
+    width: 25%;
+    min-width: 60px;
+    border-radius: 50%;
+}
+
+.gigUpper>div {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+
+    margin-left: 6%;
+}
+
+.gigLower {
+    display: flex;
+    justify-content: space-between;
+}

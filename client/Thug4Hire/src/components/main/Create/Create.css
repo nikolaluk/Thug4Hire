@@ -1,6 +1,6 @@
 .createForm {
     position: absolute;
-    top:20%;
+    top:15%;
     left:35%;
 
     border-color: #202225;
@@ -62,7 +62,7 @@
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 1em;
+    margin-top:2em;
 
     padding-top: 0.5em;
     padding-bottom: 0.5em;

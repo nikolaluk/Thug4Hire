@@ -1,0 +1,81 @@
+.gigDetails {
+    position: relative;
+    top: 8vh;
+    left: 15vw;
+    padding: 2em;
+
+    display: flex;
+    gap: 2em;
+
+    width: 70vw;
+    min-height: 24vh;
+
+    background-color: #292D30;
+    box-shadow: 6px -6px 1px #303439;
+
+    color: #929298;
+}
+
+.gigDetailsAside{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.gigDetailsAside>img{
+    border-radius: 50%;
+}
+
+.gigDetailsAsideButtons {
+    display: flex;
+    gap: 1em;
+}
+
+.gigDetailsAsideButtons>button {
+    border-color: #36393F;
+    border-style: solid;
+    border-width: 3px;
+
+    background-color: #929298;
+    
+    font-weight: bold;
+    font-size: 0.8em;
+    color: #36393F;
+}
+
+.gigDetailsAsideButtons>button:hover {
+    background-color: #36393F;
+    
+    font-weight: bold;
+    font-size: 0.8em;
+    color: #929298;
+}
+
+.gigDetailsAsideButtons>.btn1 {
+    cursor: pointer;
+    width: 6em;
+    height: 3em;
+
+    border-radius: 1.5em;
+}
+
+.gigDetailsAsideButtons>.btn2{
+    cursor: pointer;
+    width: 3em;
+    height: 3em;
+
+    border-radius: 50%;
+}
+
+.gigDetailsMain{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: 2em;
+}
+
+.gigDetailsMain>.upper{
+    display: flex;
+    justify-content: space-between;
+}

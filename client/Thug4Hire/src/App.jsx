@@ -9,6 +9,7 @@ import Register from './components/user/Register/Register'
 import Logout from './components/user/Logout/Logout'
 import Create from './components/main/Create/Create'
 import Catalog from './components/main/Catalog/Catalog'
+import Details from './components/main/Details/Details'
 
 function App() {
 
@@ -28,7 +29,7 @@ function App() {
             <Route path='/create' element={<Create />} />
             <Route path='/catalog' element={<Catalog />} />
 
-            <Route></Route>
+            <Route path='/gig/:gigId' element={<Details/>}/>
           </Routes>
         </div>
 

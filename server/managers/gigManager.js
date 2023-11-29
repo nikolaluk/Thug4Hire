@@ -1,7 +1,7 @@
 const Gig = require('../models/Gig');
 
-exports.create = async ({owner, title}) => {
-    const gig = new Gig({owner, title});
+exports.create = async ({title, type, price, description, owner}) => {
+    const gig = new Gig({title, type, price, description, owner});
 
     return gig.save();
 }
@@ -18,7 +18,11 @@ exports.getAll = async function () {
     // if (to) {
     //     cubes = cubes.filter(cube => cube.difficultyLevel <= to);
     // }
-    console.log(gigs);
 
     return gigs;
+}
+
+exports.getOne = async function (gigId) {
+    const gig = Gig.findById(gigId).populate('owner').lean();
+    return gig;
 }
