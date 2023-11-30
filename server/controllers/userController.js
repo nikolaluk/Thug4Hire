@@ -8,6 +8,7 @@ router.post('/register', async (req,res) => {
 
         res.json(result);
     } catch(err){
+        console.log(err);
         res.status(400).json({
             message: err.message,
         })
@@ -28,6 +29,16 @@ router.post('/login', async (req,res) => {
 
 router.get('/logout',(req,res) => {
     res.end();
+});
+
+router.get('/:userId', async (req,res) => {
+    const user = await userManager.getOne(req.params.userId);
+
+    if(!user) {
+        throw new Error('User not found!');
+    }
+
+    res.json(user);
 });
 
 module.exports = router;

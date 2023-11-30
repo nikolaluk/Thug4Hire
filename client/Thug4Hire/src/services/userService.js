@@ -27,3 +27,11 @@ export const register = async(username, password, repeatPassword) => {
 
     return result;
 }
+
+export const getOneUser = async(userId) => {
+    const response = await fetch(`${apiUrl}/${userId}`);
+
+    const result = await response.json();
+
+    return result;
+}

@@ -10,6 +10,7 @@ import Logout from './components/user/Logout/Logout'
 import Create from './components/main/Create/Create'
 import Catalog from './components/main/Catalog/Catalog'
 import Details from './components/main/Details/Details'
+import Profile from './components/user/Profile/Profile'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/logout' element={<Logout />} />
+            <Route path='/profile' element={<Profile />} />
 
             <Route path='/create' element={<Create />} />
             <Route path='/catalog' element={<Catalog />} />

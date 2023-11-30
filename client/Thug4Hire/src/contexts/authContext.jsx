@@ -8,7 +8,7 @@ const AuthContext = createContext();
 AuthContext.displayName = 'AuthContext';
 
 // eslint-disable-next-line react/prop-types
-export const AuthProvider = ({children}) => {
+export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
     const [auth, setAuth] = useState({
         _id: localStorage.getItem('_id'),
@@ -17,21 +17,29 @@ export const AuthProvider = ({children}) => {
     });
 
     const loginSubmitHandler = async (values) => {
-        const result = await login(values.username, values.password);
-        setAuth(result);
-        localStorage.setItem('_id', result._id);
-        localStorage.setItem('username', result.username);
-        localStorage.setItem('accessToken', result.accessToken);
-        navigate('/')
+        try {
+            const result = await login(values.username, values.password);
+            setAuth(result);
+            localStorage.setItem('_id', result._id);
+            localStorage.setItem('username', result.username);
+            localStorage.setItem('accessToken', result.accessToken);
+            navigate('/')
+        } catch (err) {
+            console.log(err);
+        }    
     }
 
     const registerSubmitHandler = async (values) => {
-        const result = await register(values.username, values.password, values.repeatPassword);
-        setAuth(result);
-        localStorage.setItem('_id', result._id);
-        localStorage.setItem('username', result.username);
-        localStorage.setItem('accessToken', result.accessToken);
-        navigate('/');
+        try {
+            const result = await register(values.username, values.password, values.repeatPassword);
+            setAuth(result);
+            localStorage.setItem('_id', result._id);
+            localStorage.setItem('username', result.username);
+            localStorage.setItem('accessToken', result.accessToken);
+            navigate('/');
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     const logoutHandler = () => {

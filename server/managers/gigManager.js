@@ -1,7 +1,10 @@
 const Gig = require('../models/Gig');
+const User = require('../models/User')
 
 exports.create = async ({title, type, price, description, owner}) => {
     const gig = new Gig({title, type, price, description, owner});
+
+    await User.findByIdAndUpdate(owner._id, { $push: { gigs: gig._id } });
 
     return gig.save();
 }

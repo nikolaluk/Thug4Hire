@@ -10,6 +10,15 @@ const userSchema = new mongoose.Schema({
         type: String,
         required:true,
     },
+    imageUrl: {
+        type: String || null,
+    },
+    gigs: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'Gig'
+        }
+    ]
 });
 
 userSchema.pre('save', async function () {

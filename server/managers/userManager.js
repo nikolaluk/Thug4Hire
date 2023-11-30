@@ -12,7 +12,7 @@ exports.register = async ({username, password, repeatPassword}) => {
         throw new Error('Passwords must match!');
     }
 
-    const user = await User.create({username, password});
+    const user = await User.create({username, password, imageUrl: null});
 
     const result = getAuthResult(user);
 
@@ -35,6 +35,11 @@ exports.login = async ({ username, password }) => {
     const result = getAuthResult(user);
 
     return result;
+}
+
+exports.getOne = async function (userId) {
+    const user = User.findById(userId).populate('gigs').lean();
+    return user;
 }
 
 function getAuthResult(user) {

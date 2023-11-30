@@ -17,7 +17,7 @@ function Header() {
         <div className='headerLinks'>
           <Link to={"/catalog"} className='headerLink'>Hire</Link>
           <Link to={"/create"} className='headerLink'>Offer</Link>
-          <Link to={"/offer"} className='headerLink'>Profile</Link>
+          <Link to={"/profile"} className='headerLink'>Profile</Link>
           <Link to={"/logout"} className='headerLink'>Logout</Link>
         </div>
       )}
