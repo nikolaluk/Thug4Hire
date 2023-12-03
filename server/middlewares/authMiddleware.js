@@ -11,7 +11,7 @@ exports.auth = (req,res,next) => {
 
             next();
         } catch(err) {
-            res.status(401).josn({
+            res.status(401).json({
                 message: 'You are not authorized',
             })
         }

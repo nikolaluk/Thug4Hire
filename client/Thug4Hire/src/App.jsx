@@ -11,6 +11,8 @@ import Create from './components/main/Create/Create'
 import Catalog from './components/main/Catalog/Catalog'
 import Details from './components/main/Details/Details'
 import Profile from './components/user/Profile/Profile'
+import Edit from './components/gig/Edit/Edit'
+import Delete from './components/gig/Delete/Delete'
 
 function App() {
 
@@ -32,6 +34,8 @@ function App() {
             <Route path='/catalog' element={<Catalog />} />
 
             <Route path='/gig/:gigId' element={<Details/>}/>
+            <Route path='/edit/:gigId' element={<Edit/>} />
+            <Route path='/delete/:gigId' element={<Delete/>} />
           </Routes>
         </div>
 

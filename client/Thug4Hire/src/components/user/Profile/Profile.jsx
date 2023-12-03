@@ -5,6 +5,7 @@ import { getOneUser } from '../../../services/userService';
 import Stars from '../../shared/Stars/Stars';
 
 import './Profile.css';
+import { Link } from 'react-router-dom';
 
 function Profile() {
     const [user, setUser] = useState({});
@@ -14,10 +15,10 @@ function Profile() {
     if(user.gigs) {
         gigs = user.gigs.map(gig => {
             return (
-                <div className='profileGig' key={gig._id}>
+                <Link to={`/gig/${gig._id}`} className='profileGig' key={gig._id}>
                     <h2>{gig.title}</h2>
                     <h2>{gig.type}</h2>
-                </div>
+                </Link>
             )
         })
     }

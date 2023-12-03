@@ -15,6 +15,22 @@ export const createGig = async(title, type, price, description) => {
     return result;
 }
 
+export const editGig = async(gigId, title, type, price, description) => {
+    console.log(localStorage.getItem('accessToken'));
+    const response = await fetch(`${apiUrl}/${gigId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Authorization': localStorage.getItem('accessToken'),
+        },
+        body: JSON.stringify({title, type, price, description}),
+    });
+
+    const result = await response.json();
+
+    return result;
+}
+
 export const getAllGigs = async() => {
     const response = await fetch(`${apiUrl}/`);
 

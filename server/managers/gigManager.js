@@ -29,3 +29,7 @@ exports.getOne = async function (gigId) {
     const gig = Gig.findById(gigId).populate('owner').lean();
     return gig;
 }
+
+exports.editOne = async function (gigId, {title, type, price, description, owner}) {
+    return Gig.findByIdAndUpdate(gigId, {title, type, price, description, owner});
+}

@@ -52,6 +52,31 @@
     color: #929298;
 }
 
+.gigDetailsAsideButtons>.gigDetailsButtons {
+    border-color: #36393F;
+    border-style: solid;
+    border-width: 3px;
+
+    background-color: #929298;
+    
+    font-weight: bold;
+    font-size: 0.8em;
+    color: #36393F;
+
+    text-decoration: none;
+    text-align: center;
+    line-height: 2.4em;
+}
+
+.gigDetailsAsideButtons>.gigDetailsButtons:hover {
+    background-color: #36393F;
+    
+    font-weight: bold;
+    font-size: 0.8em;
+    color: #929298;
+}
+
+
 .gigDetailsAsideButtons>.btn1 {
     cursor: pointer;
     width: 6em;
