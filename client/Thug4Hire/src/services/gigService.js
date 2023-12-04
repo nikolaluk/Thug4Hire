@@ -16,7 +16,6 @@ export const createGig = async(title, type, price, description) => {
 }
 
 export const editGig = async(gigId, title, type, price, description) => {
-    console.log(localStorage.getItem('accessToken'));
     const response = await fetch(`${apiUrl}/${gigId}`, {
         method: 'PUT',
         headers: {
@@ -24,6 +23,19 @@ export const editGig = async(gigId, title, type, price, description) => {
             'X-Authorization': localStorage.getItem('accessToken'),
         },
         body: JSON.stringify({title, type, price, description}),
+    });
+
+    const result = await response.json();
+
+    return result;
+}
+
+export const deleteOneGig = async(gigId) => {
+    const response = await fetch(`${apiUrl}/${gigId}`, {
+        method: 'DELETE',
+        headers: {
+            'X-Authorization': localStorage.getItem('accessToken'),
+        },
     });
 
     const result = await response.json();

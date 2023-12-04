@@ -41,7 +41,7 @@ function Edit() {
             .catch((err) => {
                 console.log(err);
             })
-    }, [])
+    }, [gigId])
 
     return(
         <form className='createForm'>
