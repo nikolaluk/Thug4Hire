@@ -12,6 +12,10 @@ function Register() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
+
+    const [showPassword, setShowPassword] = useState(false);
+    const [showRepeatPassword, setShowRepeatPassword] = useState(false);
+
     const { registerSubmitHandler } = useContext(AuthContext);
 
     function usernameChangeHandler(event) {
@@ -29,7 +33,23 @@ function Register() {
     function submitHandler(event) {
         event.preventDefault();
 
-        registerSubmitHandler({username, password, repeatPassword});
+        registerSubmitHandler({ username, password, repeatPassword });
+    }
+
+    function changePasswordVisibility() {
+        if (showPassword) {
+            setShowPassword(false);
+        } else {
+            setShowPassword(true);
+        }
+    }
+
+    function changeRepeatPasswordVisibility() {
+        if (showRepeatPassword) {
+            setShowRepeatPassword(false);
+        } else {
+            setShowRepeatPassword(true);
+        }
     }
 
     return (
@@ -39,16 +59,31 @@ function Register() {
                 <label htmlFor="username">Username:</label>
                 <input name='username' type="username" value={username} onChange={usernameChangeHandler} />
             </div>
-            <div>
-                <label htmlFor="password" className='fix'>Password:</label>
-                <input name='password' type="password" value={password} onChange={passwordChangeHandler} />
-                <FontAwesomeIcon icon="fa-solid fa-eye" className='registerIcon' />
-            </div>
-            <div>
-                <label htmlFor="password">Repeat password:</label>
-                <input name="password" type="password" value={repeatPassword} onChange={repeatPasswordChangeHandler} />
-                <FontAwesomeIcon icon="fa-solid fa-eye" className='registerIcon' />
-            </div>
+            {!showPassword &&
+                <div>
+                    <label htmlFor="password" className='fix'>Password:</label>
+                    <input name='password' type="password" value={password} onChange={passwordChangeHandler} />
+                    <FontAwesomeIcon icon="fa-solid fa-eye" className='registerIcon' onClick={changePasswordVisibility} />
+                </div>}
+            {showPassword &&
+                <div>
+                    <label htmlFor="password" className='fix'>Password:</label>
+                    <input name='password' type="text" value={password} onChange={passwordChangeHandler} />
+                    <FontAwesomeIcon icon="fa-solid fa-eye-slash" className='registerIcon' onClick={changePasswordVisibility} />
+                </div>}
+
+            {!showRepeatPassword &&
+                <div>
+                    <label htmlFor="password">Repeat password:</label>
+                    <input name="password" type="password" value={repeatPassword} onChange={repeatPasswordChangeHandler} />
+                    <FontAwesomeIcon icon="fa-solid fa-eye" className='registerIcon' onClick={changeRepeatPasswordVisibility}/>
+                </div>}
+            {showRepeatPassword &&
+                <div>
+                    <label htmlFor="password">Repeat password:</label>
+                    <input name="password" type="text" value={repeatPassword} onChange={repeatPasswordChangeHandler} />
+                    <FontAwesomeIcon icon="fa-solid fa-eye-slash" className='registerIcon' onClick={changeRepeatPasswordVisibility}/>
+                </div>}
             <button type='submit' onClick={submitHandler}>Submit</button>
         </form>
     )

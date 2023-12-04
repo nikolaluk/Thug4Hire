@@ -11,6 +11,7 @@ library.add(fas);
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const { loginSubmitHandler } = useContext(AuthContext);
 
   function usernameChangeHandler(event) {
@@ -24,7 +25,15 @@ function Login() {
   function submitHandler(event) {
     event.preventDefault();
 
-    loginSubmitHandler({username, password});
+    loginSubmitHandler({ username, password });
+  }
+
+  function changePasswordVisibility() {
+    if(showPassword) {
+      setShowPassword(false);
+    } else {
+      setShowPassword(true);
+    }
   }
 
   return (
@@ -34,11 +43,19 @@ function Login() {
         <label htmlFor="username">Username:</label>
         <input name='username' type="username" value={username} onChange={usernameChangeHandler} />
       </div>
-      <div>
-        <label htmlFor="password" className='fix'>Password:</label>
-        <input name='password' type="password" value={password} onChange={passwordChangeHandler} />
-        <FontAwesomeIcon icon="fa-solid fa-eye" className='loginIcon' />
-      </div>
+      {!showPassword &&
+        <div>
+          <label htmlFor="password" className='fix'>Password:</label>
+          <input name='password' type="password" value={password} onChange={passwordChangeHandler} />
+          <FontAwesomeIcon icon="fa-solid fa-eye" className='loginIcon' onClick={changePasswordVisibility}/>
+        </div>}
+
+      {showPassword &&
+        <div>
+          <label htmlFor="password" className='fix'>Password:</label>
+          <input name='password' type="text" value={password} onChange={passwordChangeHandler} />
+          <FontAwesomeIcon icon="fa-solid fa-eye-slash" className='loginIcon'  onClick={changePasswordVisibility}/>
+        </div>}
       <button type='submit' onClick={submitHandler}>Submit</button>
     </form>
   )
