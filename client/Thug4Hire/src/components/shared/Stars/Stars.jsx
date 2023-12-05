@@ -5,14 +5,14 @@ import './Stars.css'
 
 library.add(fas);
 
-function Stars (props) {
+function Stars () {
     return (
         <div className='stars'>
             <FontAwesomeIcon icon="fa-solid fa-star"/>
             <FontAwesomeIcon icon="fa-solid fa-star"/>
             <FontAwesomeIcon icon="fa-solid fa-star"/>
             <FontAwesomeIcon icon="fa-solid fa-star"/>
-            <FontAwesomeIcon icon="fa-solid fa-star"/>    
+            <FontAwesomeIcon icon="fa-solid fa-star-half"/>    
         </div>
     )
 }

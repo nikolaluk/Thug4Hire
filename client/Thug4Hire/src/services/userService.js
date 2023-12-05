@@ -35,3 +35,19 @@ export const getOneUser = async(userId) => {
 
     return result;
 }
+
+export const changeImage = async(userId, imageUrl) =>  {
+    const response = await fetch(`${apiUrl}/changePicture/${userId}`,
+        {
+            method: 'PUT',
+            headers: {
+                'X-Authorization': localStorage.getItem('accessToken'),
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({imageUrl})
+        })
+
+    const result = await response.json();
+
+    return result;
+}

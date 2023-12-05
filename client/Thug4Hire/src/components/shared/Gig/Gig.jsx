@@ -9,7 +9,7 @@ function Gig(props) {
                 <div className='gigUpper'>
                     <img src="/public/images/profilePlaceholder.jpg" alt="" />
                     <div>
-                        <h2 className='gigName'>Username</h2>
+                        <h2 className='gigName'>{gig.data.owner.username}</h2>
                         <h2 className='gigTitle'>{gig.data.title}</h2>
                     </div>
                 </div>

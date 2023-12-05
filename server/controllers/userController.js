@@ -41,4 +41,16 @@ router.get('/:userId', async (req,res) => {
     res.json(user);
 });
 
+router.put('/changePicture/:userId', async (req,res) => {
+    try {
+        const result = await userManager.changePicture(req.params.userId, req.body)
+
+        res.json(result);
+    } catch(err) {
+        res.status(400).json({
+            message: err.message,
+        })
+    }
+})
+
 module.exports = router;

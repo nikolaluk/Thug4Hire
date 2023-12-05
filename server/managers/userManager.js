@@ -42,6 +42,13 @@ exports.getOne = async function (userId) {
     return user;
 }
 
+exports.changePicture = async function(userId, {imageUrl}) {
+    console.log(imageUrl);
+    const result = User.findByIdAndUpdate(userId, {imageUrl});
+
+    return result;
+}
+
 function getAuthResult(user) {
     const payload = {
         _id: user._id,

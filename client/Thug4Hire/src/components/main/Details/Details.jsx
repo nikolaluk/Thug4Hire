@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
@@ -35,12 +34,11 @@ function Details() {
         <div className='gigDetails'>
             <div className='gigDetailsAside'>
                 <img src="/public/images/profilePlaceholder.jpg" alt="" />
-                <h2>Username</h2>
+                {gig.owner && <h2>{gig.owner.username}</h2>}
                 {!isOwner &&
                 <div className='gigDetailsAsideButtons'>
-                    <button className='btn1'>Hire</button>
                     <button className='btn1'>Contact</button>
-                    <button className='btn2'><FontAwesomeIcon icon="fa-solid fa-heart" className='likeIcon' /></button>
+                    <button className='btn1'>Rate</button>
                 </div>}
 
                 {isOwner &&

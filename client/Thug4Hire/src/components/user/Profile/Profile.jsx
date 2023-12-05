@@ -1,14 +1,16 @@
-import { jwtDecode } from 'jwt-decode';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { getOneUser } from '../../../services/userService';
 
 import Stars from '../../shared/Stars/Stars';
 
 import './Profile.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import AuthContext from '../../../contexts/authContext';
 
 function Profile() {
     const [user, setUser] = useState({});
+    const navigate = useNavigate();
+    const {userId} = useContext(AuthContext);
 
     let gigs = <h2>No Gigs Yet</h2>;
 
@@ -23,8 +25,11 @@ function Profile() {
         })
     }
 
+    function navigateToPicture() {
+        navigate(`/picture/${userId}`)
+    }
+
     useEffect(() => {
-        const userId = jwtDecode(localStorage.getItem('accessToken'))._id;
         getOneUser(userId)
             .then((data) => {
                 setUser(data)
@@ -32,7 +37,7 @@ function Profile() {
             .catch((err) => {
                 console.log(err);
             })
-    }, []);
+    }, [userId]);
 
     return (
         <div className='profile'>
@@ -48,7 +53,7 @@ function Profile() {
                 </div>
                 
                 <div className='profileButtons'>
-                    <button>Change picture</button>
+                    <button onClick={navigateToPicture}>Change picture</button>
                     <button>Change username</button>
                 </div>
             </div>

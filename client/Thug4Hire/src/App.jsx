@@ -13,6 +13,7 @@ import Details from './components/main/Details/Details'
 import Profile from './components/user/Profile/Profile'
 import Edit from './components/gig/Edit/Edit'
 import Delete from './components/gig/Delete/Delete'
+import Picture from './components/user/Picture/Picture'
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
             <Route path='/register' element={<Register />} />
             <Route path='/logout' element={<Logout />} />
             <Route path='/profile' element={<Profile />} />
+            <Route path='/picture/:userId' element={<Picture />}/>
 
             <Route path='/create' element={<Create />} />
             <Route path='/catalog' element={<Catalog />} />

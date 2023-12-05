@@ -10,7 +10,7 @@ exports.create = async ({title, type, price, description, owner}) => {
 }
 
 exports.getAll = async function () {
-    let gigs = await Gig.find().lean();
+    let gigs = await Gig.find().populate('owner').lean();
 
     // if (search) {
     //     cubes = cubes.filter(cube => cube.name.toLowerCase().includes(search.toLowerCase()));
