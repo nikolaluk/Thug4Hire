@@ -43,8 +43,13 @@ exports.getOne = async function (userId) {
 }
 
 exports.changePicture = async function(userId, {imageUrl}) {
-    console.log(imageUrl);
     const result = User.findByIdAndUpdate(userId, {imageUrl});
+
+    return result;
+}
+
+exports.changeEmail = async function(userId, {email}) {
+    const result = User.findByIdAndUpdate(userId, {email});
 
     return result;
 }

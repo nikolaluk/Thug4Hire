@@ -13,11 +13,20 @@ library.add(fas);
 function Details() {
     const { gigId } = useParams();
     const [gig, setGig] = useState({});
+    const [showEmail, setShowEmail] = useState(false);
 
     const { userId } = useContext(AuthContext);
     let isOwner = false;
-    if(gig.owner) {
+    if (gig.owner) {
         isOwner = userId == gig.owner._id;
+    }
+
+    function showEmailHandler() {
+        if(showEmail) {
+            setShowEmail(false);
+        } else {
+            setShowEmail(true);
+        }
     }
 
     useEffect(() => {
@@ -33,19 +42,23 @@ function Details() {
     return (
         <div className='gigDetails'>
             <div className='gigDetailsAside'>
-                <img src="/public/images/profilePlaceholder.jpg" alt="" />
+                {gig.owner && gig.owner.imageUrl ?
+                    <img src={gig.owner.imageUrl} alt="" /> :
+                    <img src="/images/profilePlaceholder.jpg" alt="" />}
+
                 {gig.owner && <h2>{gig.owner.username}</h2>}
                 {!isOwner &&
-                <div className='gigDetailsAsideButtons'>
-                    <button className='btn1'>Contact</button>
-                    <button className='btn1'>Rate</button>
-                </div>}
+                    <div className='gigDetailsAsideButtons'>
+                        <button onClick={showEmailHandler} className='btn1'>Contact</button>
+                        <button className='btn1'>Rate</button>
+                    </div>}
+                {showEmail && <span>{gig.owner.email}</span>}
 
                 {isOwner &&
-                <div className='gigDetailsAsideButtons'>
-                    <Link to={`/edit/${gig._id}`} className='btn1 gigDetailsButtons'>Edit</Link>
-                    <Link to={`/delete/${gig._id}`} className='btn1 gigDetailsButtons'>Delete</Link>
-                </div>}
+                    <div className='gigDetailsAsideButtons'>
+                        <Link to={`/edit/${gig._id}`} className='btn1 gigDetailsButtons'>Edit</Link>
+                        <Link to={`/delete/${gig._id}`} className='btn1 gigDetailsButtons'>Delete</Link>
+                    </div>}
             </div>
 
             <hr />

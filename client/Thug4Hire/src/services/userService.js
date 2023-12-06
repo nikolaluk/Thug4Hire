@@ -51,3 +51,19 @@ export const changeImage = async(userId, imageUrl) =>  {
 
     return result;
 }
+
+export const changeEmail = async(userId, email) =>  {
+    const response = await fetch(`${apiUrl}/changeEmail/${userId}`,
+        {
+            method: 'PUT',
+            headers: {
+                'X-Authorization': localStorage.getItem('accessToken'),
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({email})
+        })
+
+    const result = await response.json();
+
+    return result;
+}

@@ -24,6 +24,7 @@ function Header() {
 
       {!isAuthenticated && (
         <div className='headerLinks'>
+          <Link to={"/catalog"} className='headerLink'>Browse</Link>
           <Link to={"/login"} className='headerLink'>Login</Link>
           <Link to={"/register"} className='headerLink'>Register</Link>
         </div>

@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import './Picture.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { changeImage } from '../../../services/userService';
+import './Picture.css';
 
 function Picture() {
     const {userId} = useParams();
     const [imageUrl, setImageUrl] = useState('');
+    const navigate = useNavigate();
 
     function imageUrlChangeHandler(event) {
         setImageUrl(event.target.value);
@@ -15,6 +16,7 @@ function Picture() {
         event.preventDefault();
 
         changeImage(userId, imageUrl);
+        navigate(`/profile`);
     }
 
     return (

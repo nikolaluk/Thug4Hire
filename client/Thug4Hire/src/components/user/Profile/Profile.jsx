@@ -29,6 +29,10 @@ function Profile() {
         navigate(`/picture/${userId}`)
     }
 
+    function navigateToEmail() {
+        navigate(`/email/${userId}`)
+    }
+
     useEffect(() => {
         getOneUser(userId)
             .then((data) => {
@@ -42,9 +46,15 @@ function Profile() {
     return (
         <div className='profile'>
             <div className='profileLeft'>
-                <img src="/public/images/profilePlaceholder.jpg" alt="" />
+                {user.imageUrl ?
+                <img src={user.imageUrl} alt="" /> :
+                <img src="/images/profilePlaceholder.jpg" alt="" />
+                }
                 <h2>{user.username}</h2>
-                
+                {user.email ?
+                <span>{user.email}</span> :
+                <span>No email set.</span>
+                }
                 <hr />
 
                 <div className='profileRating'>
@@ -53,8 +63,8 @@ function Profile() {
                 </div>
                 
                 <div className='profileButtons'>
-                    <button onClick={navigateToPicture}>Change picture</button>
-                    <button>Change username</button>
+                    <button onClick={navigateToPicture}>Set picture</button>
+                    <button onClick={navigateToEmail}>Set email</button>
                 </div>
             </div>
             <div className='profileCenter'>

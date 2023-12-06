@@ -24,12 +24,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1em;
 }
 
 .profileLeft>img {
     width: 95%;
     border-radius: 50%;
+    margin-bottom: 1em;
 }
 
 .profileLeft>hr {
@@ -37,6 +37,8 @@
     border-width: 0px;
     height: 1px;
     background-color: #929298;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 .profileCenter {
@@ -77,6 +79,8 @@
     align-items: center;
     gap: 0.4em;
     margin-top: 3vh;
+
+    min-width: 6vw;
 }
 
 .profileButtons>button {
