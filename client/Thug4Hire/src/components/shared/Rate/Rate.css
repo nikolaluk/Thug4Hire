@@ -1,0 +1,43 @@
+.ratingPopup {
+    position: fixed;
+    top: 40%;
+    left: 42vw;
+
+    width: 16vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    padding: 20px;
+    border-radius: 2px;
+    z-index: 1000;
+
+    background-color: #292D30;
+    box-shadow: 6px -6px 1px #303439;
+}
+
+.ratingPopup > div  {
+    display: flex;
+    gap: 0.4em;
+    margin-bottom: 1em;
+}
+
+.ratingPopup > div > .icon {
+    font-size: 2vw;
+    color: #929298;
+    cursor: pointer;
+}
+
+.ratingPopup > div > .icon.active {
+    color: yellow;
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}

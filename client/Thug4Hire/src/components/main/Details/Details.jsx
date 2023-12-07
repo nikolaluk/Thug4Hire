@@ -7,6 +7,7 @@ import { getOneGig } from '../../../services/gigService';
 import AuthContext from '../../../contexts/authContext';
 
 import './Details.css'
+import Rate from '../../shared/Rate/Rate';
 
 library.add(fas);
 
@@ -14,6 +15,7 @@ function Details() {
     const { gigId } = useParams();
     const [gig, setGig] = useState({});
     const [showEmail, setShowEmail] = useState(false);
+    const [showRate, setShowRate] = useState(false);
 
     const { userId } = useContext(AuthContext);
     let isOwner = false;
@@ -22,10 +24,18 @@ function Details() {
     }
 
     function showEmailHandler() {
-        if(showEmail) {
+        if (showEmail) {
             setShowEmail(false);
         } else {
             setShowEmail(true);
+        }
+    }
+
+    function showRateHandler() {
+        if (showRate) {
+            setShowRate(false);
+        } else {
+            setShowRate(true);
         }
     }
 
@@ -47,10 +57,11 @@ function Details() {
                     <img src="/images/profilePlaceholder.jpg" alt="" />}
 
                 {gig.owner && <h2>{gig.owner.username}</h2>}
+
                 {!isOwner &&
                     <div className='gigDetailsAsideButtons'>
                         <button onClick={showEmailHandler} className='btn1'>Contact</button>
-                        <button className='btn1'>Rate</button>
+                        <button onClick={showRateHandler} className='btn1'>Rate</button>
                     </div>}
                 {showEmail && <span>{gig.owner.email}</span>}
 
@@ -75,6 +86,10 @@ function Details() {
                     <p>{gig.description}</p>
                 </div>
             </div>
+
+            {showRate && (
+                <Rate data={showRateHandler}/>
+            )}
         </div>
     )
 }

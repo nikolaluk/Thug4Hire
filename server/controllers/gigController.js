@@ -11,8 +11,6 @@ router.get('/', async (req,res) => {
 });
 
 router.get('/:gigId', async (req,res) => {
-    // const {search,from,to} = req.query;
-
     const gig = await gigManager.getOne(req.params.gigId);
 
     if(!gig){

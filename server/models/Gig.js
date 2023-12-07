@@ -17,6 +17,12 @@ const gigSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    reviews: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'Review',
+        }
+    ],
     owner: {
         type: mongoose.Types.ObjectId,
         ref: 'User'

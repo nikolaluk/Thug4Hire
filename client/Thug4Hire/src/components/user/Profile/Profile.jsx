@@ -12,9 +12,11 @@ function Profile() {
     const navigate = useNavigate();
     const {userId} = useContext(AuthContext);
 
+    let reviewData = [];
     let gigs = <h2>No Gigs Yet</h2>;
+    let reviews = <h2>No Reviews Yet</h2>
 
-    if(user.gigs) {
+    if(user.gigs.length > 0) {
         gigs = user.gigs.map(gig => {
             return (
                 <Link to={`/gig/${gig._id}`} className='profileGig' key={gig._id}>
@@ -23,6 +25,24 @@ function Profile() {
                 </Link>
             )
         })
+
+        for(let gig of user.gigs) {
+            if(gig.reviews) {
+                for(let rev of gig.reviews) {
+                    reviewData.push(rev);
+                }
+            }
+        }
+        
+        if(reviewData[0]) {
+            reviews = reviewData.map(review => {
+                return (
+                    <div key={review}>
+                        <Stars/>
+                    </div>
+                )
+            })
+        }
     }
 
     function navigateToPicture() {
@@ -75,6 +95,7 @@ function Profile() {
             <div className='profileRight'>
                 <h2>Reviews:</h2>
                 <hr />
+                {reviews}
             </div>
         </div>
     )
