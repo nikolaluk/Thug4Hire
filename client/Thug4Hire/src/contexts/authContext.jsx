@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('_id', result._id);
         localStorage.setItem('username', result.username);
         localStorage.setItem('accessToken', result.accessToken);
-        if(result.error == false) {
+        if(!result.error) {
             navigate('/')
         }
 
@@ -35,7 +35,8 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('_id', result._id);
             localStorage.setItem('username', result.username);
             localStorage.setItem('accessToken', result.accessToken);
-            if(result.error == false) {
+            console.log(result);
+            if(!result.error) {
                 navigate('/');
             }
 
