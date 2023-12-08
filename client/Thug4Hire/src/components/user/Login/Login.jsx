@@ -11,6 +11,7 @@ library.add(fas);
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const { loginSubmitHandler } = useContext(AuthContext);
 
@@ -25,7 +26,14 @@ function Login() {
   function submitHandler(event) {
     event.preventDefault();
 
-    loginSubmitHandler({ username, password });
+    loginSubmitHandler({ username, password })
+      .then(data => {
+        if(data.error) {
+          setErrorMessage(data.message);
+        }
+      }).catch(err => {
+        console.log(err);
+      });
   }
 
   function changePasswordVisibility() {
@@ -56,6 +64,9 @@ function Login() {
           <input name='password' type="text" value={password} onChange={passwordChangeHandler} />
           <FontAwesomeIcon icon="fa-solid fa-eye-slash" className='loginIcon'  onClick={changePasswordVisibility}/>
         </div>}
+
+      {errorMessage && 
+      <span>{errorMessage}</span>}
       <button type='submit' onClick={submitHandler}>Submit</button>
     </form>
   )

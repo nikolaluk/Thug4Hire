@@ -17,29 +17,29 @@ export const AuthProvider = ({ children }) => {
     });
 
     const loginSubmitHandler = async (values) => {
-        try {
-            const result = await login(values.username, values.password);
-            setAuth(result);
-            localStorage.setItem('_id', result._id);
-            localStorage.setItem('username', result.username);
-            localStorage.setItem('accessToken', result.accessToken);
+        const result = await login(values.username, values.password);
+        setAuth(result);
+        localStorage.setItem('_id', result._id);
+        localStorage.setItem('username', result.username);
+        localStorage.setItem('accessToken', result.accessToken);
+        if(result.error == false) {
             navigate('/')
-        } catch (err) {
-            console.log(err);
-        }    
+        }
+
+        return result;
     }
 
     const registerSubmitHandler = async (values) => {
-        try {
             const result = await register(values.username, values.password, values.repeatPassword);
             setAuth(result);
             localStorage.setItem('_id', result._id);
             localStorage.setItem('username', result.username);
             localStorage.setItem('accessToken', result.accessToken);
-            navigate('/');
-        } catch (err) {
-            console.log(err);
-        }
+            if(result.error == false) {
+                navigate('/');
+            }
+
+            return result;
     }
 
     const logoutHandler = () => {

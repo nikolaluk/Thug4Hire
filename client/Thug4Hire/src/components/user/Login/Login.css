@@ -33,6 +33,12 @@
     flex-direction: column;
 }
 
+.loginForm>span {
+    color: rgb(250, 91, 91);
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .loginForm > div > label {
     width: fit-content;
     

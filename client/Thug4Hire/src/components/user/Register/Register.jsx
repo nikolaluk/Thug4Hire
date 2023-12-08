@@ -11,6 +11,7 @@ library.add(fas);
 function Register() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState(null);
     const [repeatPassword, setRepeatPassword] = useState('');
 
     const [showPassword, setShowPassword] = useState(false);
@@ -33,7 +34,14 @@ function Register() {
     function submitHandler(event) {
         event.preventDefault();
 
-        registerSubmitHandler({ username, password, repeatPassword });
+        registerSubmitHandler({ username, password, repeatPassword })
+            .then(data => {
+                if (data.error) {
+                    setErrorMessage(data.message);
+                }
+            }).catch(err => {
+                console.log(err);
+            });
     }
 
     function changePasswordVisibility() {
@@ -76,14 +84,16 @@ function Register() {
                 <div>
                     <label htmlFor="password">Repeat password:</label>
                     <input name="password" type="password" value={repeatPassword} onChange={repeatPasswordChangeHandler} />
-                    <FontAwesomeIcon icon="fa-solid fa-eye" className='registerIcon' onClick={changeRepeatPasswordVisibility}/>
+                    <FontAwesomeIcon icon="fa-solid fa-eye" className='registerIcon' onClick={changeRepeatPasswordVisibility} />
                 </div>}
             {showRepeatPassword &&
                 <div>
                     <label htmlFor="password">Repeat password:</label>
                     <input name="password" type="text" value={repeatPassword} onChange={repeatPasswordChangeHandler} />
-                    <FontAwesomeIcon icon="fa-solid fa-eye-slash" className='registerIcon' onClick={changeRepeatPasswordVisibility}/>
+                    <FontAwesomeIcon icon="fa-solid fa-eye-slash" className='registerIcon' onClick={changeRepeatPasswordVisibility} />
                 </div>}
+            {errorMessage &&
+                <span>{errorMessage}</span>}
             <button type='submit' onClick={submitHandler}>Submit</button>
         </form>
     )

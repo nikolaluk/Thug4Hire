@@ -26,6 +26,7 @@ function Rate(props) {
         submitGigRating(gigId, rating)
             .then(data => console.log(data))
             .catch(err => console.log(err))
+        data.data();
     }
  
     return (
