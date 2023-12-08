@@ -14,3 +14,11 @@ export const submitGigRating = async(gigId, rating) => {
 
     return result;
 }
+
+export const getOneReview = async(reviewId) => {
+    const response = await fetch(`${apiUrl}/${reviewId}`);
+
+    const result = await response.json();
+
+    return result;
+}

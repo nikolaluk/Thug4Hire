@@ -16,3 +16,9 @@ exports.create = async({rating, owner, gigId}) => {
 
     return review.save();
 }
+
+exports.getOne = async(reviewId) => {
+    const review = Review.findById(reviewId).lean();
+    
+    return review;
+}

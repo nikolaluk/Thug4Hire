@@ -6,39 +6,37 @@ import Stars from '../../shared/Stars/Stars';
 import './Profile.css';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from '../../../contexts/authContext';
+import { getOneReview } from '../../../services/reviewService';
 
 function Profile() {
-    const [user, setUser] = useState({});
     const navigate = useNavigate();
+
+    const [user, setUser] = useState({});
+    const [reviews, setReviews] = useState([]);
+    const [reviewsAvg, setReviewsAvg] = useState(1);
+
     const {userId} = useContext(AuthContext);
 
-    let reviewData = [];
     let gigs = <h2>No Gigs Yet</h2>;
-    let reviews = <h2>No Reviews Yet</h2>
+    let reviewElement = <h2>No Reviews Yet</h2>;
 
-    if(user.gigs.length > 0) {
-        gigs = user.gigs.map(gig => {
-            return (
-                <Link to={`/gig/${gig._id}`} className='profileGig' key={gig._id}>
-                    <h2>{gig.title}</h2>
-                    <h2>{gig.type}</h2>
-                </Link>
-            )
-        })
-
-        for(let gig of user.gigs) {
-            if(gig.reviews) {
-                for(let rev of gig.reviews) {
-                    reviewData.push(rev);
-                }
-            }
-        }
-        
-        if(reviewData[0]) {
-            reviews = reviewData.map(review => {
+    if(user.gigs) {
+        if(user.gigs[0]){   
+            gigs = user.gigs.map(gig => {
                 return (
-                    <div key={review}>
-                        <Stars/>
+                    <Link to={`/gig/${gig._id}`} className='profileGig' key={gig._id}>
+                        <h2>{gig.title}</h2>
+                        <h2>{gig.type}</h2>
+                    </Link>
+                )
+            })
+        }
+
+        if(reviews[0]) {
+            reviewElement = reviews.map(review => {
+                return (
+                    <div key={review._id}>
+                        <Stars data={review.rating}/>
                     </div>
                 )
             })
@@ -56,12 +54,46 @@ function Profile() {
     useEffect(() => {
         getOneUser(userId)
             .then((data) => {
-                setUser(data)
+                setUser(data);
             })
             .catch((err) => {
                 console.log(err);
-            })
+            });
     }, [userId]);
+    
+    useEffect(() => {
+        let reviewIds = [];
+        let reviewsTemp = [];
+    
+        if (user.gigs) {
+            for (let gig of user.gigs) {
+                for (let reviewId of gig.reviews) {
+                    reviewIds.push(reviewId);
+                }
+            }
+    
+            const fetchReviews = async () => {
+                for (let id of reviewIds) {
+                    try {
+                        const data = await getOneReview(id);
+                        reviewsTemp.push(data);
+                    } catch (err) {
+                        console.log(err);
+                    }
+                }
+    
+                let sum = 0;
+                for (let review of reviewsTemp) {
+                    sum += Number(review.rating);
+                }
+                
+                setReviews(reviewsTemp);
+                setReviewsAvg(sum / reviewsTemp.length);
+            };
+    
+            fetchReviews();
+        }
+    }, [user]);
 
     return (
         <div className='profile'>
@@ -78,8 +110,8 @@ function Profile() {
                 <hr />
 
                 <div className='profileRating'>
-                    <p>Rating: 4.5/5</p>
-                    <Stars/>
+                    <p>Rating: {reviewsAvg.toFixed(2)}/5</p>
+                    <Stars data={reviewsAvg}/>
                 </div>
                 
                 <div className='profileButtons'>
@@ -95,7 +127,7 @@ function Profile() {
             <div className='profileRight'>
                 <h2>Reviews:</h2>
                 <hr />
-                {reviews}
+                {reviewElement}
             </div>
         </div>
     )
