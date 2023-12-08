@@ -123,12 +123,17 @@
 }
 
 .profileGig {
+    display: flex;
+    justify-content: space-between;
+
     width: 100%;
-    min-height: 18vh;
     margin-left: auto;
     margin-right: auto;
+    padding: 1em;
+    margin-bottom: 0.4em;
 
     background-color: #303439;
+    box-shadow: 4px 4px 1px #3b3e41;
 
     text-decoration: none;
     color: #929298;

@@ -1,0 +1,50 @@
+.home {
+    position: relative;
+    top: 30vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.overText {
+    color: #929298;
+    z-index: 999;
+}
+
+.underText {
+    position: relative;
+    left: 0.15vw;
+    bottom: 5.8vh;
+
+    color:#202225;
+}
+
+.home>div {
+    display: flex;
+    gap: 2em;
+}
+
+.homeButtons {
+    padding: 1em 2em;
+
+    border-color: #36393F;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 1em;
+    
+    background-color: #929298;
+    
+    font-weight: bold;
+    font-size: 0.8em;
+    color: #36393F;
+    text-decoration: none;
+}
+
+.homeButtons:hover {
+    background-color: #36393F;
+    
+    font-weight: bold;
+    font-size: 0.8em;
+    color: #929298;
+}

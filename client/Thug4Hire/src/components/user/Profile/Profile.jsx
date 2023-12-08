@@ -7,6 +7,7 @@ import './Profile.css';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from '../../../contexts/authContext';
 import { getOneReview } from '../../../services/reviewService';
+import StarsReview from '../../shared/StarsReview/StarsReview';
 
 function Profile() {
     const navigate = useNavigate();
@@ -36,7 +37,7 @@ function Profile() {
             reviewElement = reviews.map(review => {
                 return (
                     <div key={review._id}>
-                        <Stars data={review.rating}/>
+                        <StarsReview data={review.rating}/>
                     </div>
                 )
             })

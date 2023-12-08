@@ -15,6 +15,7 @@ import Edit from './components/gig/Edit/Edit'
 import Delete from './components/gig/Delete/Delete'
 import Picture from './components/user/Picture/Picture'
 import Email from './components/user/Email/Email'
+import Home from './components/main/Home/Home'
 
 function App() {
 
@@ -25,7 +26,7 @@ function App() {
 
         <div className='body'>
           <Routes>
-            <Route path='/' />
+            <Route path='/' element={<Home/>}/>
 
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
