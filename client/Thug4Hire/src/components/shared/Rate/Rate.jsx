@@ -9,7 +9,7 @@ import { submitGigRating } from '../../../services/reviewService';
 library.add(fas);
 
 function Rate(props) {
-    const data = props;
+    const propFunctions = props;
 
     const {gigId} = useParams();
     const [selectedStars, setSelectedStars] = useState(0);
@@ -24,14 +24,18 @@ function Rate(props) {
 
     function handleRateSubmit(rating) {
         submitGigRating(gigId, rating)
-            .then(data => console.log(data))
+            .then(data => {
+                if(data.error) {
+                    propFunctions.data[1](data.message);
+                }
+            })
             .catch(err => console.log(err))
-        data.data();
+            propFunctions.data[0]();
     }
  
     return (
         <>
-            <div className='backdrop' onClick={data.data}></div>
+            <div className='backdrop' onClick={propFunctions.data[0]}></div>
             <div className='ratingPopup'>
                 <div>
                     <FontAwesomeIcon
@@ -66,7 +70,7 @@ function Rate(props) {
                         onClick={() => handleRateSubmit(5)} />
                 </div>
 
-                <button onClick={data.data}>Close</button>
+                <button onClick={propFunctions.data[0]}>Close</button>
             </div>
         </>
     )

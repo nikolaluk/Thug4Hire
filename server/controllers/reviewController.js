@@ -27,6 +27,7 @@ router.post('/:gigId', isAuth, async (req, res) => {
         res.json(result);
     } catch (err) {
         res.status(403).json({
+            error: true,
             message: err.message,
         })
     }

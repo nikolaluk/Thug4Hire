@@ -16,6 +16,7 @@ function Details() {
     const [gig, setGig] = useState({});
     const [showEmail, setShowEmail] = useState(false);
     const [showRate, setShowRate] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(null);
 
     const { userId } = useContext(AuthContext);
     let isOwner = false;
@@ -64,6 +65,7 @@ function Details() {
                         <button onClick={showRateHandler} className='btn1'>Rate</button>
                     </div>}
                 {showEmail && <span>{gig.owner.email}</span>}
+                {errorMessage && <span className='error'>{errorMessage}</span>}
 
                 {isOwner &&
                     <div className='gigDetailsAsideButtons'>
@@ -88,7 +90,7 @@ function Details() {
             </div>
 
             {showRate && (
-                <Rate data={showRateHandler}/>
+                <Rate data={[showRateHandler, setErrorMessage]}/>
             )}
         </div>
     )
