@@ -37,7 +37,7 @@ function Profile() {
             reviewElement = reviews.map(review => {
                 return (
                     <div key={review._id}>
-                        <StarsReview data={review.rating}/>
+                        <StarsReview data={[review.rating, review.text]}/>
                     </div>
                 )
             })
@@ -76,6 +76,7 @@ function Profile() {
             const fetchReviews = async () => {
                 for (let id of reviewIds) {
                     try {
+                        console.log(id);
                         const data = await getOneReview(id);
                         reviewsTemp.push(data);
                     } catch (err) {

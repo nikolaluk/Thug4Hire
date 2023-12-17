@@ -115,7 +115,21 @@
 
     display: flex;
     flex-direction: column;
+    overflow: auto;
+
     gap: 0.4em;
+}
+
+.profileRight::-webkit-scrollbar {
+    width: 12px;
+}
+
+.profileRight::-webkit-scrollbar-thumb {
+    background-color: #292D30;
+}
+
+.profileRight::-webkit-scrollbar-track {
+    background-color: #303439;
 }
 
 .profileRight>h2 {

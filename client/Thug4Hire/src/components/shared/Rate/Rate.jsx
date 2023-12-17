@@ -11,8 +11,19 @@ library.add(fas);
 function Rate(props) {
     const propFunctions = props;
 
-    const {gigId} = useParams();
+    const { gigId } = useParams();
+    const [text, setText] = useState('');
     const [selectedStars, setSelectedStars] = useState(0);
+    const [constantSelectedStars, setConstantSelectedStars] = useState(0);
+
+
+    function handleTextChange(event) {
+        setText(event.target.value);
+    }
+
+    function handleStarClick(index) {
+        setConstantSelectedStars(index + 1);
+    }
 
     function handleStarMouseOver(index) {
         setSelectedStars(index + 1);
@@ -22,17 +33,17 @@ function Rate(props) {
         setSelectedStars(0);
     }
 
-    function handleRateSubmit(rating) {
-        submitGigRating(gigId, rating)
+    function handleRateSubmit(rating, text) {
+        submitGigRating(gigId, rating, text)
             .then(data => {
-                if(data.error) {
+                if (data.error) {
                     propFunctions.data[1](data.message);
                 }
             })
             .catch(err => console.log(err))
-            propFunctions.data[0]();
+        propFunctions.data[0]();
     }
- 
+
     return (
         <>
             <div className='backdrop' onClick={propFunctions.data[0]}></div>
@@ -40,37 +51,45 @@ function Rate(props) {
                 <div>
                     <FontAwesomeIcon
                         key={1} icon="fa-solid fa-star"
-                        className={`icon ${1 < selectedStars ? 'active' : ''}`}
+                        className={`icon ${1 < selectedStars || 1 < constantSelectedStars ? 'active' : ''}`}
                         onMouseOver={() => handleStarMouseOver(1)}
                         onMouseOut={handleStarMouseOut}
-                        onClick={() => handleRateSubmit(1)} />
+                        onClick={() => handleStarClick(1)} />
                     <FontAwesomeIcon
                         key={2} icon="fa-solid fa-star"
-                        className={`icon ${2 < selectedStars ? 'active' : ''}`}
+                        className={`icon ${2 < selectedStars || 2 < constantSelectedStars ? 'active' : ''}`}
                         onMouseOver={() => handleStarMouseOver(2)}
-                        onMouseOut={handleStarMouseOut} 
-                        onClick={() => handleRateSubmit(2)} />
+                        onMouseOut={handleStarMouseOut}
+                        onClick={() => handleStarClick(2)} />
                     <FontAwesomeIcon
                         key={3} icon="fa-solid fa-star"
-                        className={`icon ${3 < selectedStars ? 'active' : ''}`}
+                        className={`icon ${3 < selectedStars || 3 < constantSelectedStars ? 'active' : ''}`}
                         onMouseOver={() => handleStarMouseOver(3)}
                         onMouseOut={handleStarMouseOut}
-                        onClick={() => handleRateSubmit(3)} />
+                        onClick={() => handleStarClick(3)} />
                     <FontAwesomeIcon
                         key={4} icon="fa-solid fa-star"
-                        className={`icon ${4 < selectedStars ? 'active' : ''}`}
+                        className={`icon ${4 < selectedStars || 4 < constantSelectedStars ? 'active' : ''}`}
                         onMouseOver={() => handleStarMouseOver(4)}
                         onMouseOut={handleStarMouseOut}
-                        onClick={() => handleRateSubmit(4)} />
+                        onClick={() => handleStarClick(4)} />
                     <FontAwesomeIcon
                         key={5} icon="fa-solid fa-star"
-                        className={`icon ${5 < selectedStars ? 'active' : ''}`}
+                        className={`icon ${5 < selectedStars || 5 < constantSelectedStars ? 'active' : ''}`}
                         onMouseOver={() => handleStarMouseOver(5)}
                         onMouseOut={handleStarMouseOut}
-                        onClick={() => handleRateSubmit(5)} />
+                        onClick={() => handleStarClick(5)} />
                 </div>
 
-                <button onClick={propFunctions.data[0]}>Close</button>
+                <textarea name="text" id="text" cols="26" rows="3"
+                    value={text}
+                    onChange={handleTextChange}
+                />
+
+                <div className='rate-buttons'>
+                    <button onClick={() => handleRateSubmit(constantSelectedStars, text)}>Submit</button>
+                    <button onClick={propFunctions.data[0]}>Close</button>
+                </div>
             </div>
         </>
     )

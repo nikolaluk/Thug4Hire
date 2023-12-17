@@ -41,3 +41,13 @@
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
 }
+
+textarea {
+    background-color: #363940;
+    border-color: #929298;
+    color: #929298;
+    border-radius: 1em;
+
+    padding: 0.4em;
+    margin-bottom: 1em;
+}

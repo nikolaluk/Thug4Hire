@@ -1,7 +1,7 @@
 const Review = require('../models/Review');
 const Gig = require('../models/Gig')
 
-exports.create = async({rating, owner, gigId}) => {
+exports.create = async({rating, text, owner, gigId}) => {
     const gig = await Gig.findById(gigId).populate('reviews');
 
     for(rev of gig.reviews) {
@@ -10,7 +10,7 @@ exports.create = async({rating, owner, gigId}) => {
         }
     }
 
-    const review = new Review({rating, owner, gigId});
+    const review = new Review({rating, text, owner, gigId});
 
     await Gig.findByIdAndUpdate(gigId, {$push: {reviews: review._id}});
 

@@ -1,6 +1,8 @@
 .stars-review {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 0.2em;
     width: 90%;
     margin-left: auto;
@@ -12,4 +14,9 @@
     background-color: #303439;
     padding: 0.4em;
     box-shadow: 4px 4px 1px #3b3e41;
+}
+
+.stars-review > span {
+    color: #929298;
+    text-align: center;
 }

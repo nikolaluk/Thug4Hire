@@ -21,9 +21,9 @@ router.get('/:reviewId', async(req,res) => {
 
 router.post('/:gigId', isAuth, async (req, res) => {
     try {
-        const { rating } = req.body;
+        const { rating, text } = req.body;
         const owner = req.user;
-        const result = await reviewManager.create({ rating, owner, gigId: req.params.gigId });
+        const result = await reviewManager.create({ rating, text, owner, gigId: req.params.gigId });
         res.json(result);
     } catch (err) {
         res.status(403).json({

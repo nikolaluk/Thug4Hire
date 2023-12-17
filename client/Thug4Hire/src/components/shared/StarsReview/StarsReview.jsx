@@ -6,7 +6,7 @@ import './StarsReview.css';
 library.add(fas);
 
 function StarsReview(data) {
-    const rating = Number(data.data);
+    const [rating, text] = data.data;
     const starsToDisplay = Array.from({length: rating/1});
     for(let i = 1; i <= starsToDisplay.length; i++) {
         starsToDisplay[i-1] = i;
@@ -14,11 +14,15 @@ function StarsReview(data) {
 
     return (
         <div className='stars-review'>
+            <div>
             {starsToDisplay.map(index => {
                 return (<FontAwesomeIcon icon="fa-solid fa-star" key={index}/>)
             })}
             {rating % 1 >= 0.5 && 
             <FontAwesomeIcon icon="fa-solid fa-star-half"/>}
+            </div>       
+
+            <span>{text && '"'}{text}{text && '"'}</span>
         </div>
     )
 }
