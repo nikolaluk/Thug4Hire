@@ -4,27 +4,26 @@ import { changeImage } from '../../../services/userService';
 import './Picture.css';
 
 function Picture() {
-    const {userId} = useParams();
-    const [imageUrl, setImageUrl] = useState('');
+    const { userId } = useParams();
+    const [image, setImage] = useState(null);
     const navigate = useNavigate();
 
-    function imageUrlChangeHandler(event) {
-        setImageUrl(event.target.value);
-    }
+    const imageChangeHandler = (event) => {
+        setImage(event.target.files.item(0));
+    };
 
     function submitHandler(event) {
         event.preventDefault();
 
-        changeImage(userId, imageUrl);
-        navigate(`/profile`);
+        changeImage(userId, image);
+        navigate('/profile')
     }
 
     return (
         <form className='loginForm'>
             <h2>Paste image URL:</h2>
             <div>
-                <label htmlFor="username">Image:</label>
-                <input name='username' type="username" value={imageUrl} onChange={imageUrlChangeHandler} />
+                <input name='image' type="file" onChange={imageChangeHandler} />
             </div>
             <button type='submit' onClick={submitHandler}>Submit</button>
         </form>

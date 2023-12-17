@@ -1,4 +1,5 @@
 const apiUrl = 'http://localhost:3030/users';
+const apiKey = '0cc6c2dba97e9b80be707005defd03f5';
 
 export const login = async(username, password) => {
     const response = await fetch(`${apiUrl}/login`, {
@@ -36,7 +37,9 @@ export const getOneUser = async(userId) => {
     return result;
 }
 
-export const changeImage = async(userId, imageUrl) =>  {
+export const changeImage = async(userId, image) =>  {
+    const imageUrl = await uploadImage(image);
+
     const response = await fetch(`${apiUrl}/changePicture/${userId}`,
         {
             method: 'PUT',
@@ -67,3 +70,23 @@ export const changeEmail = async(userId, email) =>  {
 
     return result;
 }
+
+export const uploadImage = async (image) => {
+    const formData = new FormData();
+    formData.append('image', image);
+
+    const response = await fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Image upload failed');
+      }
+
+      const result = await response.json();
+
+      const imageUrl = result.data.url;
+
+      return imageUrl;
+  }
