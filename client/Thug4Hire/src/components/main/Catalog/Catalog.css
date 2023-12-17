@@ -9,3 +9,7 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.catalog>h2 {
+    color: #929298;
+}

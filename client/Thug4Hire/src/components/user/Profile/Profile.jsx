@@ -53,13 +53,15 @@ function Profile() {
     }
 
     useEffect(() => {
-        getOneUser(userId)
+        setTimeout(() => {
+            getOneUser(userId)
             .then((data) => {
                 setUser(data);
             })
             .catch((err) => {
                 console.log(err);
             });
+        },200) 
     }, [userId]);
     
     useEffect(() => {

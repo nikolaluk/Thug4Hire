@@ -87,7 +87,7 @@ function Rate(props) {
                 />
 
                 <div className='rate-buttons'>
-                    <button onClick={() => handleRateSubmit(constantSelectedStars, text)}>Submit</button>
+                    <button onClick={() => handleRateSubmit(constantSelectedStars - 1, text)}>Submit</button>
                     <button onClick={propFunctions.data[0]}>Close</button>
                 </div>
             </div>
